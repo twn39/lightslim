@@ -1,7 +1,5 @@
 <?php
 // DIC configuration
-use Cake\Database\Connection;
-use Cake\Database\Driver\Mysql;
 use Cake\Datasource\ConnectionManager;
 
 $container = $app->getContainer();
@@ -16,10 +14,11 @@ $container['logger'] = function ($c) {
 };
 
 ConnectionManager::setConfig('default', [
-    'className' => Connection::class,
-    'driver' => Mysql::class,
-    'database' => 'database',
-    'username' => 'root',
-    'password' => 'password',
+    'className' => getenv('DB_CONNECTION'),
+    'driver' => getenv('DB_DRIVER'),
+    'host' => getenv('DB_HOST'),
+    'database' => getenv('DB_DATABASE'),
+    'username' => getenv('DB_USERNAME'),
+    'password' => getenv('DB_PASSWORD'),
     'cacheMetadata' => false // If set to `true` you need to install the optional "cakephp/cache" package.
 ]);
