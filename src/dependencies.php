@@ -1,6 +1,8 @@
 <?php
 // DIC configuration
-use Cake\Datasource\ConnectionManager;
+use Illuminate\Events\Dispatcher;
+use Illuminate\Container\Container;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 $container = $app->getContainer();
 
@@ -13,12 +15,22 @@ $container['logger'] = function ($c) {
     return $logger;
 };
 
-ConnectionManager::setConfig('default', [
-    'className' => getenv('DB_CONNECTION'),
-    'driver' => getenv('DB_DRIVER'),
-    'host' => getenv('DB_HOST'),
-    'database' => getenv('DB_DATABASE'),
-    'username' => getenv('DB_USERNAME'),
-    'password' => getenv('DB_PASSWORD'),
-    'cacheMetadata' => false // If set to `true` you need to install the optional "cakephp/cache" package.
+$capsule = new Capsule;
+
+$capsule->addConnection([
+    'driver'    => getenv('DB_DRIVER'),
+    'host'      => getenv('DB_HOST'),
+    'database'  => getenv('DB_DATABASE'),
+    'username'  => getenv('DB_USERNAME'),
+    'password'  => getenv('DB_PASSWORD'),
+    'charset'   => 'utf8mb4',
+    'collation' => 'utf8mb4_unicode_ci',
+    'prefix'    => '',
 ]);
+
+// Set the event dispatcher used by Eloquent models... (optional)
+$capsule->setEventDispatcher(new Dispatcher(new Container));
+
+$capsule->setAsGlobal();
+
+$capsule->bootEloquent();
