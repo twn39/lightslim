@@ -1,6 +1,6 @@
 {
     "name": "lightslim/lightslim",
-    "description": "A web framework build on slimphp framework with cakephp orm.",
+    "description": "A web framework build on slimphp framework with Eloquent ORM.",
     "keywords": ["microframework", "rest", "router", "psr7"],
     "homepage": "https://github.com/twn39/lightslim",
     "license": "MIT",
