@@ -16,6 +16,7 @@
         "slim/slim": "^3.1",
         "monolog/monolog": "^1.17",
         "symfony/dotenv": "dev-master",
+        "cakephp/validation": "^3.4",
         "illuminate/database": "^5.4",
         "illuminate/events": "^5.4"
     },
