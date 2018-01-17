@@ -1,5 +1,6 @@
 <?php
 // DIC configuration
+use Monolog\Registry;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Container\Container;
 use Illuminate\Database\Capsule\Manager as Capsule;
@@ -7,13 +8,15 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 $container = $app->getContainer();
 
 // monolog
-$container['logger'] = function ($c) {
-    $settings = $c->get('settings')['logger'];
+$container['logger'] = function ($container) {
+    $settings = $container->get('settings')['logger'];
     $logger = new Monolog\Logger($settings['name']);
     $logger->pushProcessor(new Monolog\Processor\UidProcessor());
     $logger->pushHandler(new Monolog\Handler\StreamHandler($settings['path'], $settings['level']));
     return $logger;
 };
+
+Registry::addLogger($container->get('logger'));
 
 $capsule = new Capsule;
 
@@ -30,7 +33,5 @@ $capsule->addConnection([
 
 // Set the event dispatcher used by Eloquent models... (optional)
 $capsule->setEventDispatcher(new Dispatcher(new Container));
-
 $capsule->setAsGlobal();
-
 $capsule->bootEloquent();
