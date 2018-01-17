@@ -3,26 +3,32 @@ namespace Deployer;
 require 'recipe/common.php';
 
 // Configuration
-
-set('ssh_type', 'native');
-set('ssh_multiplexing', true);
-
 set('repository', 'git@domain.com:username/repository.git');
 set('shared_files', []);
 set('shared_dirs', [
-    'logs'
+    'logs',
+    'cache',
 ]);
 set('writable_dirs', [
-    'logs'
+    'logs',
+    'cache',
 ]);
 
+set('default_stage', 'development');
+set('keep_releases', 20);
 // Servers
 
-server('production', 'domain.com')
+host('production')
+    ->hostname('127.0.0.1')
     ->user('username')
-    ->identityFile()
-    ->set('deploy_path', '/var/www/domain.com');
+    ->set('deploy_path', '/var/www/domain.com')
+    ->stage('production');
 
+host('development')
+    ->hostname('www.develop.example')
+    ->user('root')
+    ->set('deploy_path', '/var/www/html/web')
+    ->stage('development');
 
 // Tasks
 
