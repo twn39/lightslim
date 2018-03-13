@@ -1,5 +1,8 @@
 # LightSlim PHP micro framework
 
+[![StyleCI](https://styleci.io/repos/100354885/shield?branch=master)](https://styleci.io/repos/100354885)
+[![Maintainability](https://api.codeclimate.com/v1/badges/d315b097cae7f4d0ca0f/maintainability)](https://codeclimate.com/github/twn39/lightslim/maintainability)
+
 Use this skeleton application to quickly setup and start working on a new Slim Framework 3 application with Eloquent ORM. 
 ## Install the Application
 

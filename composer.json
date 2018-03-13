@@ -22,7 +22,7 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.3",
-        "deployer/deployer": "^6.0",
+        "deployer/deployer": "^6.1",
         "robmorgan/phinx": "^0.9",
         "symfony/var-dumper": "^4.0"
     },
