@@ -1,5 +1,7 @@
 <?php
+
 namespace Deployer;
+
 require 'recipe/common.php';
 
 // Configuration
@@ -53,7 +55,7 @@ task('deploy', [
     'deploy:symlink',
     'deploy:unlock',
     'cleanup',
-    'success'
+    'success',
 ]);
 
 // [Optional] if deploy fails automatically unlock.

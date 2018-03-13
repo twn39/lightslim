@@ -27,6 +27,5 @@ class CreateUsersTable extends AbstractMigration
      */
     public function change()
     {
-
     }
 }
